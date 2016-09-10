@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "WindowsScreenCap", "app\Win
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "app", "app", "{B556F157-F613-445C-9100-83DC742F8E5E}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "ScreenMonitor", "app\ScreenMonitor\ScreenMonitor.vcxproj", "{E6D9E9BA-7E95-492A-95F5-4648E9D45F3B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Win32 = Debug|Win32
@@ -17,11 +19,16 @@ Global
 		{AB082B7A-4927-4777-A1C8-5F2B5B198545}.Debug|Win32.Build.0 = Debug|Win32
 		{AB082B7A-4927-4777-A1C8-5F2B5B198545}.Release|Win32.ActiveCfg = Release|Win32
 		{AB082B7A-4927-4777-A1C8-5F2B5B198545}.Release|Win32.Build.0 = Release|Win32
+		{E6D9E9BA-7E95-492A-95F5-4648E9D45F3B}.Debug|Win32.ActiveCfg = Debug|Win32
+		{E6D9E9BA-7E95-492A-95F5-4648E9D45F3B}.Debug|Win32.Build.0 = Debug|Win32
+		{E6D9E9BA-7E95-492A-95F5-4648E9D45F3B}.Release|Win32.ActiveCfg = Release|Win32
+		{E6D9E9BA-7E95-492A-95F5-4648E9D45F3B}.Release|Win32.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{AB082B7A-4927-4777-A1C8-5F2B5B198545} = {B556F157-F613-445C-9100-83DC742F8E5E}
+		{E6D9E9BA-7E95-492A-95F5-4648E9D45F3B} = {B556F157-F613-445C-9100-83DC742F8E5E}
 	EndGlobalSection
 EndGlobal
