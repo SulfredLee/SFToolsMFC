@@ -26,12 +26,13 @@ void ImageGreper::Start()
 {
 	if (m_t != NULL)
 		delete m_t;
-	m_t = new boost::thread(boost::bind(&ImageGreper::ThreadMain, this));	
+	m_bThreadExit = false;
+	m_t = new boost::thread(boost::bind(&ImageGreper::ThreadMain, this));
 }
 
 void ImageGreper::ThreadMain()
 {
-	for (int i = 0; i < 2; i++)
+	while (!m_bThreadExit)
 	{
 		HRESULT hr = Direct3D9TakeScreenshots(D3DADAPTER_DEFAULT, 1);
 		Sleep(m_iDuration);
@@ -146,7 +147,8 @@ HRESULT ImageGreper::Direct3D9TakeScreenshots(UINT adapter, UINT count)
 	{
 		WCHAR file[100];
 		wsprintf(file, L"cap%i.png", i);
-		HRCHECK(SavePixelsToFile32bppPBGRA(mode.Width, mode.Height, pitch, shots[i], file, GUID_ContainerFormatPng));
+		//HRCHECK(SavePixelsToFile32bppPBGRA(mode.Width, mode.Height, pitch, shots[i], file, GUID_ContainerFormatPng));
+		ConvertImage(mode.Width, mode.Height, pitch, shots[i]);
 	}
 
 cleanup:
@@ -170,4 +172,10 @@ void ImageGreper::UpdateObserver()
 	{
 
 	}
+}
+
+void ImageGreper::ConvertImage(const UINT& width, const UINT& height, const UINT& stride, const LPBYTE& pixels)
+{
+	cv::Mat image = cv::Mat(width, height, CV_8UC4, (unsigned*)pixels);
+	cv::imwrite("Test.jpg", image);
 }
