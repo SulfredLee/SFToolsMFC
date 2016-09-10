@@ -176,6 +176,6 @@ void ImageGreper::UpdateObserver()
 
 void ImageGreper::ConvertImage(const UINT& width, const UINT& height, const UINT& stride, const LPBYTE& pixels)
 {
-	cv::Mat image = cv::Mat(width, height, CV_8UC4, (unsigned*)pixels);
+	cv::Mat image = cv::Mat(height, width, CV_8UC4, (unsigned*)pixels);
 	cv::imwrite("Test.jpg", image);
 }
