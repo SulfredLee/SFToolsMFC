@@ -30,12 +30,24 @@
     <ClInclude Include="ScreenMonitor.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ImageGreper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageSelector.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ScreenMonitor.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageGreper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageSelector.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
