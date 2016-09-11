@@ -22,17 +22,10 @@ ImageGreper::~ImageGreper()
 {
 }
 
-void ImageGreper::Start()
-{
-	if (m_t != NULL)
-		delete m_t;
-	m_bThreadExit = false;
-	m_t = new boost::thread(boost::bind(&ImageGreper::ThreadMain, this));
-}
-
+//Override
 void ImageGreper::ThreadMain()
 {
-	while (!m_bThreadExit)
+	while (!myThread::IsEndThread())
 	{
 		HRESULT hr = Direct3D9TakeScreenshots(D3DADAPTER_DEFAULT, 1);
 		Sleep(m_iDuration);
@@ -176,6 +169,7 @@ void ImageGreper::UpdateObserver()
 
 void ImageGreper::ConvertImage(const UINT& width, const UINT& height, const UINT& stride, const LPBYTE& pixels)
 {
-	cv::Mat image = cv::Mat(height, width, CV_8UC4, (unsigned*)pixels);
-	cv::imwrite("Test.jpg", image);
+	boost::shared_ptr<cv::Mat> image(new cv::Mat);
+	*image = cv::Mat(height, width, CV_8UC4, (unsigned*)pixels);
+	cv::imwrite("Test.jpg", *image);
 }

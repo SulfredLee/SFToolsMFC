@@ -23,7 +23,7 @@ int _tmain(int argc, TCHAR* argv[], TCHAR* envp[])
 	im.GetImage(1);
 	
 	Sleep(5000);
-	im.m_bThreadExit = true;
+	im.EndThread();
 	im.m_t->join();
 
 	return nRetCode;

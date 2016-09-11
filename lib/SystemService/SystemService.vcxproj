@@ -19,27 +19,27 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{E6D9E9BA-7E95-492A-95F5-4648E9D45F3B}</ProjectGuid>
+    <ProjectGuid>{9092924D-36CD-4D15-8F61-501A440006FF}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
-    <RootNamespace>ScreenMonitor</RootNamespace>
+    <RootNamespace>SystemService</RootNamespace>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>true</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <CharacterSet>Unicode</CharacterSet>
     <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -47,7 +47,7 @@
     <UseOfMfc>Dynamic</UseOfMfc>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
-    <ConfigurationType>Application</ConfigurationType>
+    <ConfigurationType>StaticLibrary</ConfigurationType>
     <UseDebugLibraries>false</UseDebugLibraries>
     <PlatformToolset>v120</PlatformToolset>
     <WholeProgramOptimization>true</WholeProgramOptimization>
@@ -70,32 +70,19 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <LinkIncremental>true</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <LinkIncremental>false</LinkIncremental>
-  </PropertyGroup>
+  <PropertyGroup />
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>I:\WorkShop\Software_Dev\3rd_party\boost_1_59_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>I:\WorkShop\Software_Dev\3rd_party\boost_1_59_0\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>I:\WorkShop\Software_Dev\3rd_party\boost_1_59_0\lib64-msvc-12.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>boost_atomic-vc120-mt-gd-1_59.lib;boost_bzip2-vc120-mt-gd-1_59.lib;boost_chrono-vc120-mt-gd-1_59.lib;boost_container-vc120-mt-gd-1_59.lib;boost_context-vc120-mt-gd-1_59.lib;boost_coroutine-vc120-mt-gd-1_59.lib;boost_date_time-vc120-mt-gd-1_59.lib;boost_filesystem-vc120-mt-gd-1_59.lib;boost_graph-vc120-mt-gd-1_59.lib;boost_iostreams-vc120-mt-gd-1_59.lib;boost_locale-vc120-mt-gd-1_59.lib;boost_log_setup-vc120-mt-gd-1_59.lib;boost_log-vc120-mt-gd-1_59.lib;boost_math_c99f-vc120-mt-gd-1_59.lib;boost_math_c99l-vc120-mt-gd-1_59.lib;boost_math_c99-vc120-mt-gd-1_59.lib;boost_math_tr1f-vc120-mt-gd-1_59.lib;boost_math_tr1l-vc120-mt-gd-1_59.lib;boost_math_tr1-vc120-mt-gd-1_59.lib;boost_prg_exec_monitor-vc120-mt-gd-1_59.lib;boost_program_options-vc120-mt-gd-1_59.lib;boost_python-vc120-mt-gd-1_59.lib;boost_random-vc120-mt-gd-1_59.lib;boost_regex-vc120-mt-gd-1_59.lib;boost_serialization-vc120-mt-gd-1_59.lib;boost_signals-vc120-mt-gd-1_59.lib;boost_system-vc120-mt-gd-1_59.lib;boost_thread-vc120-mt-gd-1_59.lib;boost_timer-vc120-mt-gd-1_59.lib;boost_unit_test_framework-vc120-mt-gd-1_59.lib;boost_wave-vc120-mt-gd-1_59.lib;boost_wserialization-vc120-mt-gd-1_59.lib;boost_zlib-vc120-mt-gd-1_59.lib;libboost_atomic-vc120-mt-gd-1_59.lib;libboost_bzip2-vc120-mt-gd-1_59.lib;libboost_chrono-vc120-mt-gd-1_59.lib;libboost_container-vc120-mt-gd-1_59.lib;libboost_context-vc120-mt-gd-1_59.lib;libboost_coroutine-vc120-mt-gd-1_59.lib;libboost_date_time-vc120-mt-gd-1_59.lib;libboost_exception-vc120-mt-gd-1_59.lib;libboost_filesystem-vc120-mt-gd-1_59.lib;libboost_graph-vc120-mt-gd-1_59.lib;libboost_iostreams-vc120-mt-gd-1_59.lib;libboost_locale-vc120-mt-gd-1_59.lib;libboost_log_setup-vc120-mt-gd-1_59.lib;libboost_log-vc120-mt-gd-1_59.lib;libboost_math_c99f-vc120-mt-gd-1_59.lib;libboost_math_c99l-vc120-mt-gd-1_59.lib;libboost_math_c99-vc120-mt-gd-1_59.lib;libboost_math_tr1f-vc120-mt-gd-1_59.lib;libboost_math_tr1l-vc120-mt-gd-1_59.lib;libboost_math_tr1-vc120-mt-gd-1_59.lib;libboost_prg_exec_monitor-vc120-mt-gd-1_59.lib;libboost_program_options-vc120-mt-gd-1_59.lib;libboost_python-vc120-mt-gd-1_59.lib;libboost_random-vc120-mt-gd-1_59.lib;libboost_regex-vc120-mt-gd-1_59.lib;libboost_serialization-vc120-mt-gd-1_59.lib;libboost_signals-vc120-mt-gd-1_59.lib;libboost_system-vc120-mt-gd-1_59.lib;libboost_test_exec_monitor-vc120-mt-gd-1_59.lib;libboost_thread-vc120-mt-gd-1_59.lib;libboost_timer-vc120-mt-gd-1_59.lib;libboost_unit_test_framework-vc120-mt-gd-1_59.lib;libboost_wave-vc120-mt-gd-1_59.lib;libboost_wserialization-vc120-mt-gd-1_59.lib;libboost_zlib-vc120-mt-gd-1_59.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
@@ -103,19 +90,14 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <WarningLevel>Level3</WarningLevel>
       <Optimization>Disabled</Optimization>
-      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>I:\WorkShop\Software_Dev\SFToolsMFC\lib\SystemService;I:\WorkShop\Software_Dev\3rd_party\opencv\build\include;I:\WorkShop\Software_Dev\3rd_party\boost_1_59_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>I:\WorkShop\Software_Dev\3rd_party\boost_1_59_0\;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>I:\WorkShop\Software_Dev\SFToolsMFC\x64\Debug;I:\WorkShop\Software_Dev\3rd_party\opencv\build\x64\vc12\lib;I:\WorkShop\Software_Dev\3rd_party\boost_1_59_0\lib64-msvc-12.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>SystemService.lib;opencv_world310d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
-    <PostBuildEvent>
-      <Command>copy I:\WorkShop\Software_Dev\3rd_party\opencv\build\x64\vc12\bin\opencv_world310d.dll $(SolutionDir)$(Platform)\$(Configuration)\</Command>
-    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -124,11 +106,11 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
@@ -141,11 +123,11 @@
       <Optimization>MaxSpeed</Optimization>
       <FunctionLevelLinking>true</FunctionLevelLinking>
       <IntrinsicFunctions>true</IntrinsicFunctions>
-      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
     </ClCompile>
     <Link>
-      <SubSystem>Console</SubSystem>
+      <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
@@ -155,26 +137,18 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="ImageGreper.h" />
-    <ClInclude Include="ImageSelector.h" />
-    <ClInclude Include="Resource.h" />
-    <ClInclude Include="ScreenMonitor.h" />
+    <ClInclude Include="myThread.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="ImageGreper.cpp" />
-    <ClCompile Include="ImageSelector.cpp" />
-    <ClCompile Include="ScreenMonitor.cpp" />
+    <ClCompile Include="myThread.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
     </ClCompile>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="ScreenMonitor.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
