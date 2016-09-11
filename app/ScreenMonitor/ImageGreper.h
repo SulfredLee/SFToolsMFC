@@ -8,15 +8,16 @@
 #include <set>
 
 #include "myThread.h"
-
+#include "FullImage.h"
 class ImageSelector;
 class ImageGreper :
 	public myThread
 {
 public:
+	std::set<ImageSelector*> m_obsevers;
+private:
 	int m_iNumShot;
 	int m_iDuration;
-	std::set<ImageSelector*> m_obsevers;
 public:
 	ImageGreper();
 	~ImageGreper();
@@ -28,8 +29,8 @@ public:
 private:
 	HRESULT SavePixelsToFile32bppPBGRA(UINT width, UINT height, UINT stride, LPBYTE pixels, LPWSTR filePath, const GUID &format);
 	HRESULT Direct3D9TakeScreenshots(UINT adapter, UINT count);
-	void ConvertImage(const UINT& width, const UINT& height, const UINT& stride, const LPBYTE& pixels);
+	void ConvertImage(const UINT& width, const UINT& height, const UINT& stride, const LPBYTE& pixels, const std::string& timeStamp);
 
-	void UpdateObserver(boost::shared_ptr<cv::Mat> ptr);
+	void UpdateObserver(boost::shared_ptr<FullImage> ptr);
 };
 

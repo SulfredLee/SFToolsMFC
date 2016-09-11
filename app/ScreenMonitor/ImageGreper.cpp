@@ -107,8 +107,12 @@ HRESULT ImageGreper::Direct3D9TakeScreenshots(UINT adapter, UINT count)
 		shots[i] = new BYTE[pitch * mode.Height];
 	}
 
-	GetSystemTime(&st); // measure the time we spend doing <count> captures
+	//GetSystemTime(&st); // measure the time we spend doing <count> captures
 	wprintf(L"%i:%i:%i.%i\n", st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
+	char temp[1024];
+	printf_s("%04d%02d%02d_%02d%02d%02d_%04d", st.wYear, st.wMonth, st.wDay,
+		st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
+	std::string timeStamp(temp);
 	for (UINT i = 0; i < count; i++)
 	{
 		// get the data
@@ -119,8 +123,8 @@ HRESULT ImageGreper::Direct3D9TakeScreenshots(UINT adapter, UINT count)
 		CopyMemory(shots[i], rc.pBits, rc.Pitch * mode.Height);
 		HRCHECK(surface->UnlockRect());
 	}
-	GetSystemTime(&st);
-	wprintf(L"%i:%i:%i.%i\n", st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
+	//GetSystemTime(&st);
+	//wprintf(L"%i:%i:%i.%i\n", st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
 
 	// save all screenshots
 	for (UINT i = 0; i < count; i++)
@@ -128,7 +132,7 @@ HRESULT ImageGreper::Direct3D9TakeScreenshots(UINT adapter, UINT count)
 		WCHAR file[100];
 		wsprintf(file, L"cap%i.png", i);
 		//HRCHECK(SavePixelsToFile32bppPBGRA(mode.Width, mode.Height, pitch, shots[i], file, GUID_ContainerFormatPng));
-		ConvertImage(mode.Width, mode.Height, pitch, shots[i]);
+		ConvertImage(mode.Width, mode.Height, pitch, shots[i], timeStamp);
 	}
 
 cleanup:
@@ -146,19 +150,20 @@ cleanup:
 	return hr;
 }
 
-void ImageGreper::UpdateObserver(boost::shared_ptr<cv::Mat> ptr)
+void ImageGreper::UpdateObserver(boost::shared_ptr<FullImage> ptr)
 {
 	for (std::set<ImageSelector*>::iterator it = m_obsevers.begin(); it != m_obsevers.end(); it++)
 	{
-
+		(*it)->ImgSelector_Dataline(ptr);
 	}
 }
 
-void ImageGreper::ConvertImage(const UINT& width, const UINT& height, const UINT& stride, const LPBYTE& pixels)
+void ImageGreper::ConvertImage(const UINT& width, const UINT& height, const UINT& stride, const LPBYTE& pixels, const std::string& timeStamp)
 {
-	boost::shared_ptr<cv::Mat> image(new cv::Mat);
-	*image = cv::Mat(height, width, CV_8UC4, (unsigned*)pixels);
-	cv::imwrite("Test.jpg", *image);
+	boost::shared_ptr<FullImage> image(new FullImage);
+	image->m_image = cv::Mat(height, width, CV_8UC4, (unsigned*)pixels);
+	image->m_timeStamp = timeStamp;
+	cv::imwrite("Test.jpg", image->m_image);
 	UpdateObserver(image);
 }
 

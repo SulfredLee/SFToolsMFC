@@ -155,6 +155,8 @@
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="CommonData.h" />
+    <ClInclude Include="FullImage.h" />
     <ClInclude Include="ImageGreper.h" />
     <ClInclude Include="ImageSelector.h" />
     <ClInclude Include="Resource.h" />
@@ -163,6 +165,8 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="CommonData.cpp" />
+    <ClCompile Include="FullImage.cpp" />
     <ClCompile Include="ImageGreper.cpp" />
     <ClCompile Include="ImageSelector.cpp" />
     <ClCompile Include="ScreenMonitor.cpp" />

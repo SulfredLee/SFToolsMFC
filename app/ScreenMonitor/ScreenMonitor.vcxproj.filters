@@ -36,6 +36,12 @@
     <ClInclude Include="ImageSelector.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="FullImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="CommonData.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -48,6 +54,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="ImageSelector.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="FullImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CommonData.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
