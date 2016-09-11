@@ -32,19 +32,6 @@ void ImageGreper::ThreadMain()
 	}
 }
 
-void ImageGreper::GetImage(const int& numShot)
-{
-	if (numShot <= 0)
-		return;
-
-	m_iNumShot = numShot;
-	if (m_iNumShot > 32)
-		m_iNumShot = 32;
-	m_iDuration = 1000 / m_iNumShot;
-
-	Start();
-}
-
 HRESULT ImageGreper::SavePixelsToFile32bppPBGRA(UINT width, UINT height, UINT stride, LPBYTE pixels, LPWSTR filePath, const GUID &format)
 {
 	if (!filePath || !pixels)
@@ -159,7 +146,7 @@ cleanup:
 	return hr;
 }
 
-void ImageGreper::UpdateObserver()
+void ImageGreper::UpdateObserver(boost::shared_ptr<cv::Mat> ptr)
 {
 	for (std::set<ImageSelector*>::iterator it = m_obsevers.begin(); it != m_obsevers.end(); it++)
 	{
@@ -172,4 +159,16 @@ void ImageGreper::ConvertImage(const UINT& width, const UINT& height, const UINT
 	boost::shared_ptr<cv::Mat> image(new cv::Mat);
 	*image = cv::Mat(height, width, CV_8UC4, (unsigned*)pixels);
 	cv::imwrite("Test.jpg", *image);
+	UpdateObserver(image);
+}
+
+void ImageGreper::Init(const int& numShot)
+{
+	if (numShot <= 0)
+		return;
+
+	m_iNumShot = numShot;
+	if (m_iNumShot > 32)
+		m_iNumShot = 32;
+	m_iDuration = 1000 / m_iNumShot;
 }

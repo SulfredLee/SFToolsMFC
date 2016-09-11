@@ -21,7 +21,7 @@ public:
 	ImageGreper();
 	~ImageGreper();
 
-	void GetImage(const int& numShot);
+	void Init(const int& numShot);
 
 	//Override
 	void ThreadMain();
@@ -30,6 +30,6 @@ private:
 	HRESULT Direct3D9TakeScreenshots(UINT adapter, UINT count);
 	void ConvertImage(const UINT& width, const UINT& height, const UINT& stride, const LPBYTE& pixels);
 
-	void UpdateObserver();
+	void UpdateObserver(boost::shared_ptr<cv::Mat> ptr);
 };
 

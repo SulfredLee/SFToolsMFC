@@ -20,7 +20,8 @@ int _tmain(int argc, TCHAR* argv[], TCHAR* envp[])
 {
 	int nRetCode = 0;
 	ImageGreper im;
-	im.GetImage(1);
+	im.Init(1);
+	im.Start();
 	
 	Sleep(5000);
 	im.EndThread();
