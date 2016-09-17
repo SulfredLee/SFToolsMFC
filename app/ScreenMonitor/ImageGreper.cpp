@@ -107,12 +107,12 @@ HRESULT ImageGreper::Direct3D9TakeScreenshots(UINT adapter, UINT count)
 		shots[i] = new BYTE[pitch * mode.Height];
 	}
 
-	//GetSystemTime(&st); // measure the time we spend doing <count> captures
+	GetSystemTime(&st); // measure the time we spend doing <count> captures
 	wprintf(L"%i:%i:%i.%i\n", st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
 	char temp[1024];
 	printf_s("%04d%02d%02d_%02d%02d%02d_%04d", st.wYear, st.wMonth, st.wDay,
 		st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
-	std::string timeStamp(temp);
+	
 	for (UINT i = 0; i < count; i++)
 	{
 		// get the data
@@ -132,6 +132,7 @@ HRESULT ImageGreper::Direct3D9TakeScreenshots(UINT adapter, UINT count)
 		WCHAR file[100];
 		wsprintf(file, L"cap%i.png", i);
 		//HRCHECK(SavePixelsToFile32bppPBGRA(mode.Width, mode.Height, pitch, shots[i], file, GUID_ContainerFormatPng));
+		std::string timeStamp(temp);
 		ConvertImage(mode.Width, mode.Height, pitch, shots[i], timeStamp);
 	}
 
@@ -161,13 +162,14 @@ void ImageGreper::UpdateObserver(boost::shared_ptr<FullImage> ptr)
 void ImageGreper::ConvertImage(const UINT& width, const UINT& height, const UINT& stride, const LPBYTE& pixels, const std::string& timeStamp)
 {
 	boost::shared_ptr<FullImage> image(new FullImage);
-	image->m_image = cv::Mat(height, width, CV_8UC4, (unsigned*)pixels);
+	cv::Mat(height, width, CV_8UC4, (unsigned*)pixels).copyTo(image->m_image);
 	image->m_timeStamp = timeStamp;
 	cv::imwrite("Test.jpg", image->m_image);
 	UpdateObserver(image);
 }
 
-void ImageGreper::Init(const int& numShot)
+void ImageGreper::Init(const int& numShot,
+	const std::set<ImageSelector*>& observers)
 {
 	if (numShot <= 0)
 		return;
@@ -176,4 +178,6 @@ void ImageGreper::Init(const int& numShot)
 	if (m_iNumShot > 32)
 		m_iNumShot = 32;
 	m_iDuration = 1000 / m_iNumShot;
+
+	m_obsevers = observers;
 }

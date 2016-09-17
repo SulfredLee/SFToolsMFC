@@ -105,12 +105,12 @@
       <Optimization>Disabled</Optimization>
       <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
-      <AdditionalIncludeDirectories>I:\WorkShop\Software_Dev\SFToolsMFC\lib\SystemService;I:\WorkShop\Software_Dev\3rd_party\opencv\build\include;I:\WorkShop\Software_Dev\3rd_party\boost_1_59_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>..\..\lib\SystemService;..\..\..\3rd_party\opencv\build\include;..\..\..\3rd_party\boost_1_59_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>I:\WorkShop\Software_Dev\SFToolsMFC\x64\Debug;I:\WorkShop\Software_Dev\3rd_party\opencv\build\x64\vc12\lib;I:\WorkShop\Software_Dev\3rd_party\boost_1_59_0\lib64-msvc-12.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>..\..\x64\Debug;..\..\..\3rd_party\opencv\build\x64\vc12\lib;..\..\..\3rd_party\boost_1_59_0\lib64-msvc-12.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>SystemService.lib;opencv_world310d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>

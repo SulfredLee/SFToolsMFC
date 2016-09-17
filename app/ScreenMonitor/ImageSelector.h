@@ -1,27 +1,56 @@
 #pragma once
 #include <boost/shared_ptr.hpp>
 #include <boost/weak_ptr.hpp>
-#include <boost/lockfree/queue.hpp>
+//#include <boost/lockfree/queue.hpp>
 
 
 #include <opencv2/core/core.hpp>
 #include <opencv2/opencv.hpp>
 
 #include <vector>
+#include <map>
 
+#include "myThread.h"
+#include "blockingQ.h"
 #include "FullImage.h"
-class ImageSelector
+class ImageSelector :
+	public myThread
 {
 public:
+	enum msgType
+	{
+		FULLIMG
+	};
+	struct SelectorProfile
+	{
+		cv::Rect m_ROI;
+		int m_ID;
+		cv::Mat m_preImg;
+		cv::Mat m_curImg;
+	};
 	std::vector<cv::Rect> m_ROIs;
+	std::vector<int> m_IDs;
 	std::vector<int> m_imageCode;	
-	boost::lockfree::queue<boost::shared_ptr<FullImage> > m_imageQ;
+	//boost::lockfree::queue<boost::shared_ptr<FullImage> > m_imageQ;
+	blockingQ<boost::shared_ptr<FullImage> > m_imageQ;
+	blockingQ<msgType> m_msgQ;
+	std::map<int, SelectorProfile> m_mapProfiles; // Key: ID, Value: SelectorProfile
+	double m_threshold;
 public:
 	ImageSelector();
 	~ImageSelector();
 
-	void Init();
+	bool Init(const std::vector<cv::Rect>& ROIs,
+		const std::vector<int>& IDs,
+		const double threshold);
 
+	//Override
+	void ThreadMain();
+
+	//Callback
 	void ImgSelector_Dataline(boost::shared_ptr<FullImage> ptr);
+private:
+	void ProcessSelection();
+	bool ImgChanged(cv::Mat preImg, cv::Mat curImg, const double& threshold);
 };
 

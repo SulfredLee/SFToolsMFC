@@ -22,7 +22,8 @@ public:
 	ImageGreper();
 	~ImageGreper();
 
-	void Init(const int& numShot);
+	void Init(const int& numShot,
+		const std::set<ImageSelector*>& observers);
 
 	//Override
 	void ThreadMain();

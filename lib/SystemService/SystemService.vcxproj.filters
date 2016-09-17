@@ -27,12 +27,18 @@
     <ClInclude Include="myThread.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="blockingQ.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="myThread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="blockingQ.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
