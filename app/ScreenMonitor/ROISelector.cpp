@@ -53,7 +53,7 @@ void ROISelector::MouseHandler(int event, int x, int y, int flags)
 }
 
 int ROISelector::StartGetROI()
-{
+{	
 	while (m_key != 'q')
 	{
 		cvSetMouseCallback("result", ROISelector::MouseHandlerProxy, this);

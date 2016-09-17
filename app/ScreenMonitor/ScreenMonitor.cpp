@@ -25,33 +25,34 @@ using namespace std;
 int _tmain(int argc, TCHAR* argv[], TCHAR* envp[])
 {
 	int nRetCode = 0;
-	ImageGreper imGr;
-	ImageSelector imSe;
-	ImageSaver imSa;
+	ImageGreper imgGrp;
+	ImageSelector imgSel;
+	ImageSaver imgSav;
 	ROISelector ROISel;
 
-	imGr.m_observers_ROI.insert(&ROISel);
-	imGr.Direct3D9TakeScreenshots(0, 1);
-	imGr.m_observers_ROI.erase(&ROISel);
+	imgGrp.m_observers_ROI.insert(&ROISel);
+	imgGrp.Direct3D9TakeScreenshots(0, 1);
+	imgGrp.m_observers_ROI.erase(&ROISel);
 	ROISel.StartGetROI();
 
 	std::set<ImageSelector*> imSeObservers;
-	imSeObservers.insert(&imSe);
-	imGr.Init(10, imSeObservers);
+	imSeObservers.insert(&imgSel);
+	imgGrp.Init(1, imSeObservers);
 
 	std::set<ImageSaver*> imSaObservers;
-	imSaObservers.insert(&imSa);
-	imSe.Init(ROISel.m_ROIs, ROISel.m_IDs, 5, imSaObservers);
+	imSaObservers.insert(&imgSav);
+	double threshold = 50; // threshold is percentage
+	imgSel.Init(ROISel.m_ROIs, ROISel.m_IDs, threshold, imSaObservers);
 
-	imSa.Init("I:\\WorkShop\\Software_Dev\\SFToolsMFC\\");
+	imgSav.Init(".\\");
 
-	imGr.Start();
-	imSe.Start();
-	imSa.Start();
+	imgGrp.Start();
+	imgSel.Start();
+	imgSav.Start();
 	
 	//Sleep(5000);
 	//imGr.EndThread();
-	imGr.m_t->join();
+	imgGrp.m_t->join();
 
 	return nRetCode;
 }

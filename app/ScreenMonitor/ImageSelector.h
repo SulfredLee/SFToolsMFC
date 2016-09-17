@@ -57,7 +57,7 @@ public:
 	void ImgSelector_Dataline(boost::shared_ptr<FullImage> ptr);
 private:
 	void ProcessSelection();
-	bool ImgChanged(cv::Mat preImg, cv::Mat curImg, const double& threshold);
+	bool ImgChanged(const cv::Mat& preImg, const cv::Mat& curImg, const double& threshold);
 	void UpdateObserver(boost::shared_ptr<CroppedImage> ptr);
 };
 
