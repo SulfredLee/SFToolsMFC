@@ -168,6 +168,7 @@
     <ClInclude Include="ImageSaver.h" />
     <ClInclude Include="ImageSelector.h" />
     <ClInclude Include="Resource.h" />
+    <ClInclude Include="ROISelector.h" />
     <ClInclude Include="ScreenMonitor.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -179,6 +180,7 @@
     <ClCompile Include="ImageGreper.cpp" />
     <ClCompile Include="ImageSaver.cpp" />
     <ClCompile Include="ImageSelector.cpp" />
+    <ClCompile Include="ROISelector.cpp" />
     <ClCompile Include="ScreenMonitor.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>

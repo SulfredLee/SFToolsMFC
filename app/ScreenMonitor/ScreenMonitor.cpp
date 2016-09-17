@@ -6,6 +6,7 @@
 #include "ImageGreper.h"
 #include "ImageSelector.h"
 #include "ImageSaver.h"
+#include "ROISelector.h"
 
 #include <vector>
 #include <set>
@@ -27,19 +28,20 @@ int _tmain(int argc, TCHAR* argv[], TCHAR* envp[])
 	ImageGreper imGr;
 	ImageSelector imSe;
 	ImageSaver imSa;
+	ROISelector ROISel;
+
+	imGr.m_observers_ROI.insert(&ROISel);
+	imGr.Direct3D9TakeScreenshots(0, 1);
+	imGr.m_observers_ROI.erase(&ROISel);
+	ROISel.StartGetROI();
 
 	std::set<ImageSelector*> imSeObservers;
 	imSeObservers.insert(&imSe);
 	imGr.Init(10, imSeObservers);
 
 	std::set<ImageSaver*> imSaObservers;
-	std::vector<cv::Rect> ROIs;
-	std::vector<int> IDs;
-	cv::Rect myROI(10, 10, 100, 100);
-	ROIs.push_back(myROI);
-	IDs.push_back(10);
 	imSaObservers.insert(&imSa);
-	imSe.Init(ROIs, IDs, 5, imSaObservers);
+	imSe.Init(ROISel.m_ROIs, ROISel.m_IDs, 5, imSaObservers);
 
 	imSa.Init("I:\\WorkShop\\Software_Dev\\SFToolsMFC\\");
 

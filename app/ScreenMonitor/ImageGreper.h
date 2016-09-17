@@ -10,11 +10,13 @@
 #include "myThread.h"
 #include "FullImage.h"
 class ImageSelector;
+class ROISelector;
 class ImageGreper :
 	public myThread
 {
 public:
 	std::set<ImageSelector*> m_observers;
+	std::set<ROISelector*> m_observers_ROI;
 private:
 	int m_iNumShot;
 	int m_iDuration;
@@ -27,9 +29,10 @@ public:
 
 	//Override
 	void ThreadMain();
-private:
+
 	HRESULT SavePixelsToFile32bppPBGRA(UINT width, UINT height, UINT stride, LPBYTE pixels, LPWSTR filePath, const GUID &format);
 	HRESULT Direct3D9TakeScreenshots(UINT adapter, UINT count);
+private:	
 	void ConvertImage(const UINT& width, const UINT& height, const UINT& stride, const LPBYTE& pixels, const std::string& timeStamp);
 
 	void UpdateObserver(boost::shared_ptr<FullImage> ptr);

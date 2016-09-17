@@ -15,7 +15,8 @@
 #include "blockingQ.h"
 #include "FullImage.h"
 #include "CroppedImage.h"
-#include "ImageSaver.h"
+
+class ImageSaver;
 class ImageSelector :
 	public myThread
 {

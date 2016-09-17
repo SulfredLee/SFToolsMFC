@@ -56,8 +56,8 @@ bool ImageSaver::Init(const std::string& outputPath)
 
 std::string ImageSaver::ConvertID(const int& ID)
 {
-	if (ID <= 0)
-		return "";
+	if (ID < 26)
+		return std::string(1, ID + 'A');
 	char curChar = ID % 26 + 'A';
 	std::string curStr(1, curChar);	
 	return ConvertID((double)ID / 26) + curStr;

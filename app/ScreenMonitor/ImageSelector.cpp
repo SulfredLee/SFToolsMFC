@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "ImageSelector.h"
+#include "ImageSaver.h"
 
 
 ImageSelector::ImageSelector()

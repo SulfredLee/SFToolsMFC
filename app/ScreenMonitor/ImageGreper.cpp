@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "ImageGreper.h"
 #include "ImageSelector.h"
+#include "ROISelector.h"
 
 #include <Windows.h>
 #include <Wincodec.h>             // we use WIC for saving images
@@ -155,6 +156,11 @@ cleanup:
 void ImageGreper::UpdateObserver(boost::shared_ptr<FullImage> ptr)
 {
 	for (std::set<ImageSelector*>::iterator it = m_observers.begin(); it != m_observers.end(); it++)
+	{
+		(*it)->ImgSelector_Dataline(ptr);
+	}
+
+	for (std::set<ROISelector*>::iterator it = m_observers_ROI.begin(); it != m_observers_ROI.end(); it++)
 	{
 		(*it)->ImgSelector_Dataline(ptr);
 	}
