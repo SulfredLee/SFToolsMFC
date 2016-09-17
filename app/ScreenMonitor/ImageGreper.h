@@ -14,7 +14,7 @@ class ImageGreper :
 	public myThread
 {
 public:
-	std::set<ImageSelector*> m_obsevers;
+	std::set<ImageSelector*> m_observers;
 private:
 	int m_iNumShot;
 	int m_iDuration;

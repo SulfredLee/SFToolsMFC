@@ -42,6 +42,12 @@
     <ClInclude Include="CommonData.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="CroppedImage.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageSaver.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -60,6 +66,12 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="CommonData.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="CroppedImage.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ImageSaver.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

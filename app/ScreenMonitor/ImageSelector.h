@@ -9,10 +9,13 @@
 
 #include <vector>
 #include <map>
+#include <set>
 
 #include "myThread.h"
 #include "blockingQ.h"
 #include "FullImage.h"
+#include "CroppedImage.h"
+#include "ImageSaver.h"
 class ImageSelector :
 	public myThread
 {
@@ -30,7 +33,8 @@ public:
 	};
 	std::vector<cv::Rect> m_ROIs;
 	std::vector<int> m_IDs;
-	std::vector<int> m_imageCode;	
+	std::vector<int> m_imageCode;
+	std::set<ImageSaver*> m_observers;
 	//boost::lockfree::queue<boost::shared_ptr<FullImage> > m_imageQ;
 	blockingQ<boost::shared_ptr<FullImage> > m_imageQ;
 	blockingQ<msgType> m_msgQ;
@@ -42,7 +46,8 @@ public:
 
 	bool Init(const std::vector<cv::Rect>& ROIs,
 		const std::vector<int>& IDs,
-		const double threshold);
+		const double threshold,
+		const std::set<ImageSaver*>& observers);
 
 	//Override
 	void ThreadMain();
@@ -52,5 +57,6 @@ public:
 private:
 	void ProcessSelection();
 	bool ImgChanged(cv::Mat preImg, cv::Mat curImg, const double& threshold);
+	void UpdateObserver(boost::shared_ptr<CroppedImage> ptr);
 };
 

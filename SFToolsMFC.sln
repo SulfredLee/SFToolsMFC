@@ -57,7 +57,7 @@ Global
 		{9092924D-36CD-4D15-8F61-501A440006FF}.Release|Mixed Platforms.Build.0 = Release|Win32
 		{9092924D-36CD-4D15-8F61-501A440006FF}.Release|Win32.ActiveCfg = Release|Win32
 		{9092924D-36CD-4D15-8F61-501A440006FF}.Release|Win32.Build.0 = Release|Win32
-		{9092924D-36CD-4D15-8F61-501A440006FF}.Release|x64.ActiveCfg = Release|Win32
+		{9092924D-36CD-4D15-8F61-501A440006FF}.Release|x64.ActiveCfg = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

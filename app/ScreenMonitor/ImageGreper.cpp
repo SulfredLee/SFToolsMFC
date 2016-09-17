@@ -110,7 +110,8 @@ HRESULT ImageGreper::Direct3D9TakeScreenshots(UINT adapter, UINT count)
 	GetSystemTime(&st); // measure the time we spend doing <count> captures
 	wprintf(L"%i:%i:%i.%i\n", st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
 	char temp[1024];
-	printf_s("%04d%02d%02d_%02d%02d%02d_%04d", st.wYear, st.wMonth, st.wDay,
+	memset(temp, 0, 1024);
+	sprintf_s(temp, "%04d%02d%02d_%02d%02d%02d_%04d", st.wYear, st.wMonth, st.wDay,
 		st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
 	
 	for (UINT i = 0; i < count; i++)
@@ -153,7 +154,7 @@ cleanup:
 
 void ImageGreper::UpdateObserver(boost::shared_ptr<FullImage> ptr)
 {
-	for (std::set<ImageSelector*>::iterator it = m_obsevers.begin(); it != m_obsevers.end(); it++)
+	for (std::set<ImageSelector*>::iterator it = m_observers.begin(); it != m_observers.end(); it++)
 	{
 		(*it)->ImgSelector_Dataline(ptr);
 	}
@@ -164,7 +165,7 @@ void ImageGreper::ConvertImage(const UINT& width, const UINT& height, const UINT
 	boost::shared_ptr<FullImage> image(new FullImage);
 	cv::Mat(height, width, CV_8UC4, (unsigned*)pixels).copyTo(image->m_image);
 	image->m_timeStamp = timeStamp;
-	cv::imwrite("Test.jpg", image->m_image);
+	//cv::imwrite("Test.jpg", image->m_image);
 	UpdateObserver(image);
 }
 
@@ -179,5 +180,5 @@ void ImageGreper::Init(const int& numShot,
 		m_iNumShot = 32;
 	m_iDuration = 1000 / m_iNumShot;
 
-	m_obsevers = observers;
+	m_observers = observers;
 }

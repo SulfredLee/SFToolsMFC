@@ -114,7 +114,7 @@
       <AdditionalDependencies>SystemService.lib;opencv_world310d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
     <PostBuildEvent>
-      <Command>copy I:\WorkShop\Software_Dev\3rd_party\opencv\build\x64\vc12\bin\opencv_world310d.dll $(SolutionDir)$(Platform)\$(Configuration)\</Command>
+      <Command>copy ..\..\..\3rd_party\opencv\build\x64\vc12\bin\opencv_world310d.dll $(SolutionDir)$(Platform)\$(Configuration)\</Command>
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
@@ -143,21 +143,29 @@
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <SDLCheck>true</SDLCheck>
+      <AdditionalIncludeDirectories>..\..\lib\SystemService;..\..\..\3rd_party\opencv\build\include;..\..\..\3rd_party\boost_1_59_0;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
+      <AdditionalLibraryDirectories>..\..\x64\Release;..\..\..\3rd_party\opencv\build\x64\vc12\lib;..\..\..\3rd_party\boost_1_59_0\lib64-msvc-12.0;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>SystemService.lib;opencv_world310.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>copy ..\..\..\3rd_party\opencv\build\x64\vc12\bin\opencv_world310.dll $(SolutionDir)$(Platform)\$(Configuration)\</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="CommonData.h" />
+    <ClInclude Include="CroppedImage.h" />
     <ClInclude Include="FullImage.h" />
     <ClInclude Include="ImageGreper.h" />
+    <ClInclude Include="ImageSaver.h" />
     <ClInclude Include="ImageSelector.h" />
     <ClInclude Include="Resource.h" />
     <ClInclude Include="ScreenMonitor.h" />
@@ -166,8 +174,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="CommonData.cpp" />
+    <ClCompile Include="CroppedImage.cpp" />
     <ClCompile Include="FullImage.cpp" />
     <ClCompile Include="ImageGreper.cpp" />
+    <ClCompile Include="ImageSaver.cpp" />
     <ClCompile Include="ImageSelector.cpp" />
     <ClCompile Include="ScreenMonitor.cpp" />
     <ClCompile Include="stdafx.cpp">

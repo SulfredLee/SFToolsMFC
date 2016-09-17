@@ -13,7 +13,8 @@ ImageSelector::~ImageSelector()
 
 bool ImageSelector::Init(const std::vector<cv::Rect>& ROIs,
 	const std::vector<int>& IDs,
-	const double threshold)
+	const double threshold,
+	const std::set<ImageSaver*>& observers)
 {
 	if (ROIs.size() != IDs.size())
 		return false;
@@ -21,10 +22,12 @@ bool ImageSelector::Init(const std::vector<cv::Rect>& ROIs,
 	{
 		SelectorProfile tempProfile;
 		tempProfile.m_ROI = ROIs[i];
+		tempProfile.m_ID = IDs[i];
 		m_mapProfiles.insert(std::pair<int, SelectorProfile>(IDs[i], tempProfile));
 	}
 
 	m_threshold = threshold;
+	m_observers = observers;
 }
 
 //Override
@@ -71,8 +74,20 @@ void ImageSelector::ProcessSelection()
 		if (ImgChanged(it->second.m_preImg, it->second.m_curImg, m_threshold))
 		{
 			//Send the changed image to imageSaver
-			//UpdateObserver(it->second.m_curImg, it->second.m_ID);
+			boost::shared_ptr<CroppedImage> tempP(new CroppedImage);
+			it->second.m_curImg.copyTo(tempP->m_img);
+			tempP->m_ID = it->second.m_ID;
+			tempP->m_timeStamp = curFullImg->m_timeStamp;
+			UpdateObserver(tempP);
 		}
+	}
+}
+
+void ImageSelector::UpdateObserver(boost::shared_ptr<CroppedImage> ptr)
+{
+	for (std::set<ImageSaver*>::iterator it = m_observers.begin(); it != m_observers.end(); it++)
+	{
+		(*it)->ImageSaver_DataLine(ptr);
 	}
 }
 
