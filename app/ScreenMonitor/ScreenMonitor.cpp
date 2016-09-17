@@ -7,6 +7,7 @@
 #include "ImageSelector.h"
 #include "ImageSaver.h"
 #include "ROISelector.h"
+#include "ParsingCMD.h"
 
 #include <vector>
 #include <set>
@@ -25,33 +26,64 @@ using namespace std;
 int _tmain(int argc, TCHAR* argv[], TCHAR* envp[])
 {
 	int nRetCode = 0;
-	ImageGreper imgGrp;
-	ImageSelector imgSel;
-	ImageSaver imgSav;
-	ROISelector ROISel;
+	if (argc < 7)
+	{
+		nRetCode = 1;
+		std::cout << "Error:\n"
+			<< "Usage: ScreenMonitor.exe -p NumberOfThread -t Threshold -n photoPerSec\n";
+		return nRetCode;
+	}
+	
+	ParsingCMD cmdPar;
+	cmdPar.Set("-p"); cmdPar.Set("-t"); cmdPar.Set("-n");
+	cmdPar.DoParsing(argc, argv);
+	double threshold = std::stod(cmdPar["-t"]); // threshold is percentage
+	int numOfThread = std::stod(cmdPar["-p"]);
+	int numOfPhoto = std::stod(cmdPar["-n"]);
 
+	
+
+	// Get ROIs
+	ImageGreper imgGrp;
+	ROISelector ROISel;
 	imgGrp.m_observers_ROI.insert(&ROISel);
 	imgGrp.Direct3D9TakeScreenshots(0, 1);
 	imgGrp.m_observers_ROI.erase(&ROISel);
 	ROISel.StartGetROI();
+	// Get ROIs end
 
-	std::set<ImageSelector*> imSeObservers;
-	imSeObservers.insert(&imgSel);
-	imgGrp.Init(1, imSeObservers);
+	std::set<ImageSelector*> selectors;
+	std::set<ImageSaver*> savers;
 
-	std::set<ImageSaver*> imSaObservers;
-	imSaObservers.insert(&imgSav);
-	double threshold = 50; // threshold is percentage
-	imgSel.Init(ROISel.m_ROIs, ROISel.m_IDs, threshold, imSaObservers);
+	for (int i = 0; i < numOfThread; i++)
+	{
+		ImageSelector* pSel = new ImageSelector;
+		ImageSaver* pSav = new ImageSaver;
 
-	imgSav.Init(".\\");
+		selectors.insert(pSel);
+		savers.insert(pSav);
+
+		std::vector<cv::Rect> ROIs;
+		std::vector<int> IDs;
+		for (int j = 0; j < ROISel.m_ROIs.size(); j++)
+		{
+			if (j % ROISel.m_ROIs.size() == i)
+			{
+				ROIs.push_back(ROISel.m_ROIs[j]);
+				IDs.push_back(ROISel.m_IDs[j]);
+			}
+		}
+		std::set<ImageSaver*> saversTemp;
+		saversTemp.insert(pSav);
+		pSel->Init(ROIs, IDs, threshold, saversTemp);
+		pSav->Init(".\\");
+
+		pSav->Start();
+		pSel->Start();
+	}
+	imgGrp.Init(numOfPhoto, selectors);
 
 	imgGrp.Start();
-	imgSel.Start();
-	imgSav.Start();
-	
-	//Sleep(5000);
-	//imGr.EndThread();
 	imgGrp.m_t->join();
 
 	return nRetCode;

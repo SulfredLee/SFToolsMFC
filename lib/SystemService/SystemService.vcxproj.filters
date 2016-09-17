@@ -30,6 +30,9 @@
     <ClInclude Include="blockingQ.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="ParsingCMD.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -39,6 +42,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="blockingQ.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="ParsingCMD.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
