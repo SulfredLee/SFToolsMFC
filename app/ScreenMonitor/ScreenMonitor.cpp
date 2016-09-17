@@ -30,7 +30,7 @@ int _tmain(int argc, TCHAR* argv[], TCHAR* envp[])
 	{
 		nRetCode = 1;
 		std::cout << "Error:\n"
-			<< "Usage: ScreenMonitor.exe -p NumberOfThread -t Threshold -n photoPerSec\n";
+			<< "Usage: ScreenMonitor.exe -p NumberOfThread -t Threshold(percentage, mask is 3x3) -n photoPerSec\n";
 		return nRetCode;
 	}
 	

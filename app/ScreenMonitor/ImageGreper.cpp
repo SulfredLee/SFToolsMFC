@@ -108,9 +108,15 @@ HRESULT ImageGreper::Direct3D9TakeScreenshots(UINT adapter, UINT count)
 		shots[i] = new BYTE[pitch * mode.Height];
 	}
 
-	GetSystemTime(&st); // measure the time we spend doing <count> captures
-	wprintf(L"%i:%i:%i.%i\n", st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
+	GetSystemTime(&st); // measure the time we spend doing <count> captures	
 	char temp[1024];
+	memset(temp, 0, 1024);
+	sprintf_s(temp, "%02d%02d%02d", st.wHour, st.wMinute, st.wSecond);
+	if (m_preTime != temp)
+	{
+		wprintf(L"%i:%i:%i.%i\n", st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
+	}
+	m_preTime = temp;
 	memset(temp, 0, 1024);
 	sprintf_s(temp, "%04d%02d%02d_%02d%02d%02d_%04d", st.wYear, st.wMonth, st.wDay,
 		st.wHour, st.wMinute, st.wSecond, st.wMilliseconds);
@@ -182,8 +188,8 @@ void ImageGreper::Init(const int& numShot,
 		return;
 
 	m_iNumShot = numShot;
-	if (m_iNumShot > 32)
-		m_iNumShot = 32;
+	if (m_iNumShot > 128)
+		m_iNumShot = 128;
 	m_iDuration = 1000 / m_iNumShot;
 
 	m_observers = observers;

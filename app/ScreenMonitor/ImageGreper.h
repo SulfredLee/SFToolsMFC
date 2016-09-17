@@ -6,6 +6,7 @@
 #include <opencv2/opencv.hpp>
 
 #include <set>
+#include <string>
 
 #include "myThread.h"
 #include "FullImage.h"
@@ -20,6 +21,7 @@ public:
 private:
 	int m_iNumShot;
 	int m_iDuration;
+	std::string m_preTime;
 public:
 	ImageGreper();
 	~ImageGreper();

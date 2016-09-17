@@ -29,6 +29,8 @@ bool ImageSelector::Init(const std::vector<cv::Rect>& ROIs,
 
 	m_threshold = threshold;
 	m_observers = observers;
+
+	return true;
 }
 
 //Override

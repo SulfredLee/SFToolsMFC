@@ -41,6 +41,12 @@ void ROISelector::MouseHandler(int event, int x, int y, int flags)
 		cv::imshow("result", m_selectedFrame);
 		m_selectedFrame.copyTo(m_midFrame);
 		m_drag = 0;
+		//get the original size
+		m_rect.x *= 2;
+		m_rect.y *= 2;
+		m_rect.height *= 2;
+		m_rect.width *= 2;
+		//get the original size [end]
 		m_ROIs.push_back(m_rect);
 		m_IDs.push_back(m_curID++);
 	}
@@ -75,7 +81,9 @@ int ROISelector::StartGetROI()
 
 void ROISelector::ImgSelector_Dataline(boost::shared_ptr<FullImage> ptr)
 {
-	ptr->m_image.copyTo(m_orgFrame);
-	ptr->m_image.copyTo(m_selectedFrame);
-	ptr->m_image.copyTo(m_midFrame);
+	int newCol, newRow;
+	newCol = ptr->m_image.cols / 2; newRow = ptr->m_image.rows / 2;
+	cv::resize(ptr->m_image, m_orgFrame, cv::Size(newCol, newRow));
+	cv::resize(ptr->m_image, m_selectedFrame, cv::Size(newCol, newRow));
+	cv::resize(ptr->m_image, m_midFrame, cv::Size(newCol, newRow));
 }
