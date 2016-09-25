@@ -5,6 +5,7 @@
 myThread::myThread()
 {
 	m_bThreadExit = false;
+	m_t = NULL;
 }
 
 
